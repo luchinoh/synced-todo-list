@@ -1,6 +1,6 @@
 // Part 4: Add your Supabase details here
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_KEY = 'YOUR_SUPABASE_KEY';
+const SUPABASE_URL = 'https://afsfhwxputfnkztufaxq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmc2Zod3hwdXRmbmt6dHVmYXhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzMzkxODYsImV4cCI6MjA3NDkxNTE4Nn0.l8AJbdy8V8kqpY4wEoj65m1483XKHGY3Jtm3mo9FGtA';
 
 // Initialize the Supabase client
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
