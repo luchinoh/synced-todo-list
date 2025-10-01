@@ -2,8 +2,8 @@
 const SUPABASE_URL = 'https://afsfhwxputfnkztufaxq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmc2Zod3hwdXRmbmt6dHVmYXhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzMzkxODYsImV4cCI6MjA3NDkxNTE4Nn0.l8AJbdy8V8kqpY4wEoj65m1483XKHGY3Jtm3mo9FGtA';
 
-// Initialize the Supabase client
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Initialize the Supabase client - THIS IS THE CORRECTED PART
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Get references to HTML elements
 const taskInput = document.getElementById('task-input');
@@ -14,7 +14,8 @@ const todoList = document.getElementById('todo-list');
 
 // Function to fetch all todos from the database
 const fetchTodos = async () => {
-    const { data, error } = await supabase
+    // Use the new 'supabaseClient' variable
+    const { data, error } = await supabaseClient
         .from('todos')
         .select('*')
         .order('created_at', { ascending: false });
@@ -61,22 +62,24 @@ const renderTodo = (todo) => {
 // Function to add a new todo to the database
 const addTodo = async () => {
     const taskText = taskInput.value.trim();
-    if (taskText === '') return; // Don't add empty tasks
+    if (taskText === '') return;
 
-    const { error } = await supabase
+    // Use the new 'supabaseClient' variable
+    const { error } = await supabaseClient
         .from('todos')
         .insert({ task: taskText, is_complete: false });
 
     if (error) console.error('Error adding todo:', error);
     else {
-        taskInput.value = ''; // Clear the input field
-        fetchTodos(); // Refresh the list
+        taskInput.value = '';
+        fetchTodos();
     }
 };
 
 // Function to update a todo's completion status
 const updateTodoStatus = async (id, isComplete) => {
-    const { error } = await supabase
+    // Use the new 'supabaseClient' variable
+    const { error } = await supabaseClient
         .from('todos')
         .update({ is_complete: isComplete })
         .eq('id', id);
@@ -86,7 +89,8 @@ const updateTodoStatus = async (id, isComplete) => {
 
 // Function to delete a todo
 const deleteTodo = async (id) => {
-    const { error } = await supabase
+    // Use the new 'supabaseClient' variable
+    const { error } = await supabaseClient
         .from('todos')
         .delete()
         .eq('id', id);
